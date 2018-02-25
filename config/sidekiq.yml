@@ -1,0 +1,7 @@
+# https://github.com/mperham/sidekiq/wiki/Problems-and-Troubleshooting
+:concurrency: 5
+:queues:
+  - api
+  - etl
+  - default
+  - rollbar

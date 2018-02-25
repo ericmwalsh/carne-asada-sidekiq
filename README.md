@@ -22,3 +22,18 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+
+git clone
+
+I recommend you use [RVM](rvmurl)...  Ruby 2.4.3, I call my gemset carne-asada
+
+git clone
+
+rvm use 2.4.3@carne-asada
+gem install bundler
+bundle install
+bundle exec rake db:create db:migrate
+
+bundle exec rails s puma
+bundle exec sidekiq
