@@ -40,6 +40,10 @@ gem 'rollbar'
 # EXCHANGES
 gem 'exchange_wrapper'
 
+# gem 's3'
+gem 'aws-sdk-s3', '~> 1'
+gem 'fastcsv'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
