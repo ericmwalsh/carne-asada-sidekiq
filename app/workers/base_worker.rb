@@ -4,6 +4,10 @@ class BaseWorker
 
   private
 
+  def execute_query(sql_query) # string
+    ActiveRecord::Base.connection.execute(sql_query)
+  end
+
   def upload_to_s3(filename, csv_array) # string, array of equal length arrays
     csv = CSV.generate do |csv|
       csv_array.each {|row| csv << row}
@@ -16,4 +20,5 @@ class BaseWorker
       body: csv
     )
   end
+
 end

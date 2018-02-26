@@ -20,11 +20,11 @@ Sidekiq.configure_client do |config|
   }
 end
 
-# Sidekiq::Cron::Job.create(
-#   name: 'TestWorker - every 1min',
-#   cron: '*/1 * * * *',
-#   class: 'TestWorker'
-# )
+Sidekiq::Cron::Job.create(
+  name: 'TestWorker - every 1min',
+  cron: '*/1 * * * *',
+  class: 'TestWorker'
+)
 
 # Sidekiq::Cron::Job.create(
 #   name: 'CoinMarketCap worker - every 5min',
