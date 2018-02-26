@@ -21,9 +21,9 @@ Sidekiq.configure_client do |config|
 end
 
 Sidekiq::Cron::Job.create(
-  name: 'TestWorker - every 1min',
+  name: 'Binance::PricesWorker - every 1min',
   cron: '*/1 * * * *',
-  class: 'TestWorker'
+  class: 'Binance::PricesWorker'
 )
 
 # Sidekiq::Cron::Job.create(
