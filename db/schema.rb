@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20180226073441) do
     t.string "symbol"
     t.float "price"
     t.float "timestamp"
+    t.index ["symbol"], name: "index_binance_prices_on_symbol"
   end
 
 end
