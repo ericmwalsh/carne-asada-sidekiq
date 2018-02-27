@@ -26,11 +26,11 @@ Sidekiq::Cron::Job.create(
   class: 'Binance::PricesWorker'
 )
 
-# Sidekiq::Cron::Job.create(
-#   name: 'CoinMarketCap worker - every 5min',
-#   cron: '*/5 * * * *',
-#   class: 'CoinMarketCapWorker'
-# )
+Sidekiq::Cron::Job.create(
+  name: 'Binance::SymbolsWorker - every 30min',
+  cron: '*/30 * * * *',
+  class: 'Binance::SymbolsWorker'
+)
 
 # Sidekiq::Cron::Job.create(
 #   name: 'CryptoCompare worker - every day at 00:30',
