@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180228015055) do
+ActiveRecord::Schema.define(version: 20180228075055) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,24 @@ ActiveRecord::Schema.define(version: 20180228015055) do
     t.float "price", null: false
     t.float "timestamp", null: false
     t.index ["symbol", "timestamp"], name: "index_binance_prices_on_symbol_and_timestamp", unique: true
+  end
+
+  create_table "binance_snapshots", id: false, force: :cascade do |t|
+    t.string "symbol", null: false
+    t.float "price_change", null: false
+    t.float "price_change_percent", null: false
+    t.float "weighted_avg_price", null: false
+    t.float "high_price", null: false
+    t.float "low_price", null: false
+    t.float "volume", null: false
+    t.float "quote_volume", null: false
+    t.float "open_time", null: false
+    t.float "close_time", null: false
+    t.integer "first_id", null: false
+    t.integer "last_id", null: false
+    t.integer "count", null: false
+    t.float "timestamp", null: false
+    t.index ["symbol", "timestamp"], name: "index_binance_snapshots_on_symbol_and_timestamp", unique: true
   end
 
   create_table "currencies", force: :cascade do |t|
