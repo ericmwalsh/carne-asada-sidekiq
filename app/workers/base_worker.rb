@@ -5,7 +5,7 @@ class BaseWorker
   private
 
   def execute_query(sql_query) # string
-    ActiveRecord::Base.connection.execute(sql_query)
+    ActiveRecord::Base.connection.execute(sql_query) if sql_query.present?
   end
 
   def upload_to_s3(filename, csv_array) # string, array of equal length arrays

@@ -25,10 +25,10 @@ module Binance
         ]
       end
 
-      insert_query = "
+      insert_query = <<~HEREDOC
         INSERT INTO binance_prices (symbol, price, timestamp)
         VALUES #{insert_query_array.join(', ')};
-      "
+      HEREDOC
       filename = "binance/prices/#{timestamp}.csv"
 
       execute_query(insert_query)
