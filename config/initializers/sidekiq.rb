@@ -44,6 +44,12 @@ Sidekiq::Cron::Job.create(
   class: 'Binance::SnapshotsWorker'
 )
 
+Sidekiq::Cron::Job.create(
+  name: 'Binance::PricesS3Worker - every 30min (offset 1 min)',
+  cron: '1,31 * * * *',
+  class: 'Binance::PricesS3Worker'
+)
+
 # Sidekiq::Cron::Job.create(
 #   name: 'CryptoCompare worker - every day at 00:30',
 #   cron: '30 0 * * *',
