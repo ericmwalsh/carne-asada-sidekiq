@@ -6,7 +6,7 @@ module Binance
       # query and store in memory
       # push to db
       # push to aws
-      snapshots = ::ExchangeWrapper::Binance::PublicApi.day_pricing
+      snapshots = ::ExchangeWrapper::Binance::Utils.metadata
       timestamp = Time.now.to_i
 
       insert_query_array = []
