@@ -38,7 +38,7 @@ gem 'sidekiq-failures'
 gem 'rollbar'
 
 # EXCHANGES
-gem 'exchange_wrapper'
+gem 'exchange_wrapper', git: 'https://github.com/ChalupaIO/exchange_wrapper'
 
 # gem 's3'
 gem 'aws-sdk-s3', '~> 1'
