@@ -37,6 +37,9 @@ gem 'sidekiq-failures'
 
 gem 'rollbar'
 
+
+gem 'redis-rails'
+
 # EXCHANGES
 gem 'exchange_wrapper', git: 'https://github.com/ChalupaIO/exchange_wrapper'
 
