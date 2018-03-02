@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/ChalupaIO/exchange_wrapper
-  revision: 83d7c4f662bb4fab1e236d610d0558ec1dc1484e
+  revision: ba81e9a6b5196aa32247c413c2da8bc82c17fbc7
   specs:
     exchange_wrapper (0.1.11)
       coinbase (~> 4.2)
