@@ -20,6 +20,8 @@ Sidekiq.configure_client do |config|
   }
 end
 
+# BINANCE
+
 Sidekiq::Cron::Job.create(
   name: 'Binance::PricesWorker - every 1min',
   cron: '*/1 * * * *',
@@ -49,6 +51,22 @@ Sidekiq::Cron::Job.create(
   cron: '1,31 * * * *',
   class: 'Binance::PricesS3Worker'
 )
+
+# GDAX
+
+Sidekiq::Cron::Job.create(
+  name: 'Gdax::PricesWorker - every 1min',
+  cron: '*/1 * * * *',
+  class: 'Gdax::PricesWorker'
+)
+
+Sidekiq::Cron::Job.create(
+  name: 'Gdax::PricesS3Worker - every 30min (offset 1 min)',
+  cron: '1,31 * * * *',
+  class: 'Gdax::PricesS3Worker'
+)
+
+#####
 
 # Sidekiq::Cron::Job.create(
 #   name: 'CryptoCompare worker - every day at 00:30',
