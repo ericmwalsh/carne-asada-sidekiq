@@ -2,6 +2,8 @@
 module Gdax
   class PricesWorker < ::Gdax::BaseWorker
 
+    sidekiq_options :queue => 'extract', :retry => false
+
     def perform
       # query and store in memory
       # push to db

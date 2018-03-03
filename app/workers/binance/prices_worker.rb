@@ -2,6 +2,8 @@
 module Binance
   class PricesWorker < ::Binance::BaseWorker
 
+    sidekiq_options :queue => 'extract', :retry => false
+
     def perform
       # query and store in memory
       # push to db
