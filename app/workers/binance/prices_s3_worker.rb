@@ -29,7 +29,7 @@ module Binance
 
     private
     # this worker is offset by 1 minute, make sure to account for the spread
-    def get_prices(timestamp, duration = 31.5.minutes)
+    def get_prices(timestamp, duration = 31.minutes)
       execute_query(
         ::BinancePrice.where('timestamp > ?', (timestamp - duration.to_i)).to_sql
       )

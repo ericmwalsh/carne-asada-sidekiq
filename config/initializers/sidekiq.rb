@@ -29,27 +29,9 @@ Sidekiq::Cron::Job.create(
 )
 
 Sidekiq::Cron::Job.create(
-  name: 'Binance::PricesS3Worker - every 30min (offset 1 min)',
-  cron: '1,31 * * * *',
-  class: 'Binance::PricesS3Worker'
-)
-
-Sidekiq::Cron::Job.create(
-  name: 'Binance::SymbolsWorker - every 30min',
+  name: 'Binance::IntervalWorker - every 30min',
   cron: '*/30 * * * *',
-  class: 'Binance::SymbolsWorker'
-)
-
-Sidekiq::Cron::Job.create(
-  name: 'Binance::TradingPairsWorker - every 30min',
-  cron: '*/30 * * * *',
-  class: 'Binance::TradingPairsWorker'
-)
-
-Sidekiq::Cron::Job.create(
-  name: 'Binance::SnapshotsWorker - every 30min',
-  cron: '*/30 * * * *',
-  class: 'Binance::SnapshotsWorker'
+  class: 'Binance::IntervalWorker'
 )
 
 # GDAX
@@ -61,27 +43,9 @@ Sidekiq::Cron::Job.create(
 )
 
 Sidekiq::Cron::Job.create(
-  name: 'Gdax::PricesS3Worker - every 30min (offset 1 min)',
-  cron: '1,31 * * * *',
-  class: 'Gdax::PricesS3Worker'
-)
-
-Sidekiq::Cron::Job.create(
-  name: 'Gdax::SymbolsWorker - every 30min',
+  name: 'Gdax::IntervalWorker - every 30min',
   cron: '*/30 * * * *',
-  class: 'Gdax::SymbolsWorker'
-)
-
-Sidekiq::Cron::Job.create(
-  name: 'Gdax::TradingPairsWorker - every 30min',
-  cron: '*/30 * * * *',
-  class: 'Gdax::TradingPairsWorker'
-)
-
-Sidekiq::Cron::Job.create(
-  name: 'Gdax::SnapshotsWorker - every 30min',
-  cron: '*/30 * * * *',
-  class: 'Gdax::SnapshotsWorker'
+  class: 'Gdax::IntervalWorker'
 )
 
 #####
