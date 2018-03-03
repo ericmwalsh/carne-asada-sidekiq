@@ -37,6 +37,7 @@ gem 'sidekiq-failures'
 
 gem 'rollbar'
 
+gem 'oj'
 
 gem 'redis-rails'
 
