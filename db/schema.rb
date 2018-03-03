@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180303044658) do
+ActiveRecord::Schema.define(version: 20180303054041) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,21 @@ ActiveRecord::Schema.define(version: 20180303044658) do
     t.float "price", null: false
     t.float "timestamp", null: false
     t.index ["symbol", "timestamp"], name: "index_gdax_prices_on_symbol_and_timestamp", unique: true
+  end
+
+  create_table "gdax_snapshots", id: false, force: :cascade do |t|
+    t.string "symbol", null: false
+    t.float "sequence", null: false
+    t.float "price", null: false
+    t.float "open_24h", null: false
+    t.float "volume_24h", null: false
+    t.float "low_24h", null: false
+    t.float "high_24h", null: false
+    t.float "volume_30d", null: false
+    t.float "best_bid", null: false
+    t.float "best_ask", null: false
+    t.float "timestamp", null: false
+    t.index ["symbol", "timestamp"], name: "index_gdax_snapshots_on_symbol_and_timestamp", unique: true
   end
 
   create_table "trading_pairs", force: :cascade do |t|

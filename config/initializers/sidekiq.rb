@@ -78,11 +78,11 @@ Sidekiq::Cron::Job.create(
   class: 'Gdax::TradingPairsWorker'
 )
 
-# Sidekiq::Cron::Job.create(
-#   name: 'Gdax::SnapshotsWorker - every 30min',
-#   cron: '*/30 * * * *',
-#   class: 'Gdax::SnapshotsWorker'
-# )
+Sidekiq::Cron::Job.create(
+  name: 'Gdax::SnapshotsWorker - every 30min',
+  cron: '*/30 * * * *',
+  class: 'Gdax::SnapshotsWorker'
+)
 
 #####
 
