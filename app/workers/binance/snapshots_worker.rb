@@ -37,7 +37,6 @@ module Binance
       ]
 
       snapshots.each do |snapshot_hash|
-        next if snapshot_hash['symbol'] == '123456' # skip dummy data
         insert_query_array << "
           ('#{snapshot_hash['symbol']}', #{snapshot_hash['priceChange']}, #{snapshot_hash['priceChangePercent']},
           #{snapshot_hash['weightedAvgPrice']}, #{snapshot_hash['highPrice']}, #{snapshot_hash['lowPrice']},

@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/ChalupaIO/exchange_wrapper
-  revision: baf581b74a3059b2a88ee90ba4e36d634b2db28f
+  revision: 33e76c396309fa5bdbc855128f8c0376edb1aea8
   specs:
-    exchange_wrapper (0.1.11)
+    exchange_wrapper (0.1.12)
       coinbase (~> 4.2)
       coinbase-exchange (~> 0.2)
       faraday (~> 0.14)
@@ -187,7 +187,7 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (12.3.0)
-    rb-fsevent (0.10.2)
+    rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
     redis (4.0.1)

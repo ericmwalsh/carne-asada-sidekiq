@@ -48,6 +48,20 @@ Sidekiq::Cron::Job.create(
   class: 'Gdax::IntervalWorker'
 )
 
+# BITTREX
+
+Sidekiq::Cron::Job.create(
+  name: 'Bittrex::PricesWorker - every 1min',
+  cron: '*/1 * * * *',
+  class: 'Bittrex::PricesWorker'
+)
+
+Sidekiq::Cron::Job.create(
+  name: 'Bittrex::IntervalWorker - every 30min',
+  cron: '*/30 * * * *',
+  class: 'Bittrex::IntervalWorker'
+)
+
 #####
 
 # Sidekiq::Cron::Job.create(
