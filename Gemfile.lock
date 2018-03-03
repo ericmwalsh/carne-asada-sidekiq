@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/ChalupaIO/exchange_wrapper
-  revision: ba81e9a6b5196aa32247c413c2da8bc82c17fbc7
+  revision: baf581b74a3059b2a88ee90ba4e36d634b2db28f
   specs:
     exchange_wrapper (0.1.11)
       coinbase (~> 4.2)
@@ -236,7 +236,7 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
-    selenium-webdriver (3.9.0)
+    selenium-webdriver (3.10.0)
       childprocess (~> 0.5)
       rubyzip (~> 1.2)
     sidekiq (5.1.1)
