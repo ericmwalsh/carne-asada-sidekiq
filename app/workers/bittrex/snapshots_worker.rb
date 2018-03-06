@@ -27,13 +27,22 @@ module Bittrex
       ]
 
       snapshots.each do |snapshot_hash|
+        # https://rollbar.com/ericmwalsh/carne-asada-sidekiq/items/6/
+        # restrictions have been loosened for metadata,
+        # only symbol & timestamp must be non-null
         insert_query_array << "
-          ('#{snapshot_hash['symbol']}', #{snapshot_hash['High']},
-          #{snapshot_hash['Low']}, #{snapshot_hash['Volume']},
-          #{snapshot_hash['Last']}, #{snapshot_hash['BaseVolume']},
-          #{snapshot_hash['Bid']}, #{snapshot_hash['Ask']},
-          #{snapshot_hash['OpenBuyOrders']}, #{snapshot_hash['OpenSellOrders']},
-          #{snapshot_hash['PrevDay']}, #{timestamp})
+          ('#{snapshot_hash['symbol']}',
+          #{prepare_sql_value(snapshot_hash['High'])},
+          #{prepare_sql_value(snapshot_hash['Low'])},
+          #{prepare_sql_value(snapshot_hash['Volume'])},
+          #{prepare_sql_value(snapshot_hash['Last'])},
+          #{prepare_sql_value(snapshot_hash['BaseVolume'])},
+          #{prepare_sql_value(snapshot_hash['Bid'])},
+          #{prepare_sql_value(snapshot_hash['Ask'])},
+          #{prepare_sql_value(snapshot_hash['OpenBuyOrders'])},
+          #{prepare_sql_value(snapshot_hash['OpenSellOrders'])},
+          #{prepare_sql_value(snapshot_hash['PrevDay'])},
+          #{timestamp})
         "
         mapped_snapshots << [
           snapshot_hash['symbol'],
