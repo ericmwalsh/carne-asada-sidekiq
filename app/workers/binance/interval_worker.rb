@@ -1,14 +1,11 @@
 # ::Binance::IntervalWorker
 module Binance
-  class IntervalWorker < ::Binance::BaseWorker
+  class IntervalWorker < ::BaseIntervalWorker
 
-    sidekiq_options :queue => 'extract', :retry => false
+    private
 
-    def perform
-      ::Binance::SymbolsWorker.perform_in(5.seconds)
-      ::Binance::TradingPairsWorker.perform_in(10.seconds)
-      ::Binance::PricesS3Worker.perform_in(15.seconds)
-      ::Binance::SnapshotsWorker.perform_in(20.seconds)
+    def exchange_name
+      'binance'
     end
 
   end

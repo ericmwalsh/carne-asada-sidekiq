@@ -1,14 +1,11 @@
 # ::Gdax::IntervalWorker
 module Gdax
-  class IntervalWorker < ::Gdax::BaseWorker
+  class IntervalWorker < ::BaseIntervalWorker
 
-    sidekiq_options :queue => 'extract', :retry => false
+    private
 
-    def perform
-      ::Gdax::SymbolsWorker.perform_in(5.seconds)
-      ::Gdax::TradingPairsWorker.perform_in(10.seconds)
-      ::Gdax::PricesS3Worker.perform_in(15.seconds)
-      ::Gdax::SnapshotsWorker.perform_in(20.seconds)
+    def exchange_name
+      'gdax'
     end
 
   end
