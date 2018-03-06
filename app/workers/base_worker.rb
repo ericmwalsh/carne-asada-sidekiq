@@ -21,4 +21,8 @@ class BaseWorker
     )
   end
 
+  def prepare_sql_value(x)
+    x.present? ? x : 'null'
+  end
+
 end

@@ -27,7 +27,7 @@ module Bittrex
       ]
 
       snapshots.each do |snapshot_hash|
-        # https://rollbar.com/ericmwalsh/carne-asada-sidekiq/items/6/
+        # https://rollbar.com/ericmwalsh/carne-asada-sidekiq/items/7/
         # restrictions have been loosened for metadata,
         # only symbol & timestamp must be non-null
         insert_query_array << "
