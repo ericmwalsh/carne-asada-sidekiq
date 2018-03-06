@@ -2,8 +2,7 @@
 module Gdax
   class PricesWorker < ::BasePricesWorker
 
-    sidekiq_options :queue => 'extract', :retry => false
-
+    # ::ExchangeWrapper::Gdax::Utils.prices
     private
 
     def exchange_name

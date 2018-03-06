@@ -5,7 +5,7 @@ module Binance
     sidekiq_options :queue => 'extract', :retry => false
 
     private
-
+    # ::ExchangeWrapper::Binance::Utils.prices
     def exchange_name
       'binance'
     end

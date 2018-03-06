@@ -24,7 +24,7 @@ class BasePricesWorker < ::BaseWorker
   private
 
   def exchange_name
-    raise NotImplementedError, 'define this in your worker'
+    raise ::NotImplementedError, 'define this in your worker'
   end
 
   def get_prices
