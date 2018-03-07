@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/ChalupaIO/exchange_wrapper
-  revision: 33e76c396309fa5bdbc855128f8c0376edb1aea8
+  revision: 9fa05fa42b5336a6352290690a2b0d5143c58075
   specs:
     exchange_wrapper (0.1.12)
       coinbase (~> 4.2)
@@ -55,7 +55,7 @@ GEM
       activerecord (>= 3.2, < 6.0)
       rake (>= 10.4, < 13.0)
     arel (8.0.0)
-    aws-partitions (1.68.0)
+    aws-partitions (1.69.0)
     aws-sdk-core (3.17.0)
       aws-partitions (~> 1.0)
       aws-sigv4 (~> 1.0)
@@ -110,7 +110,7 @@ GEM
       http_parser.rb (>= 0.6.0)
     em-socksify (0.3.2)
       eventmachine (>= 1.0.0.beta.4)
-    erubi (1.7.0)
+    erubi (1.7.1)
     et-orbi (1.0.9)
       tzinfo
     eventmachine (1.2.5)
@@ -154,10 +154,10 @@ GEM
     nio4r (2.2.0)
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
-    oj (3.4.0)
+    oj (3.5.0)
     pg (1.0.0)
     public_suffix (3.0.2)
-    puma (3.11.2)
+    puma (3.11.3)
     rack (2.0.4)
     rack-protection (2.0.1)
       rack

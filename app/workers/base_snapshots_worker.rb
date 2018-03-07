@@ -1,6 +1,8 @@
 # ::BaseSnapshotsWorker
 class BaseSnapshotsWorker < ::BaseWorker
 
+  sidekiq_options :queue => 'extract', :retry => 2
+
   def perform
     # query and store in memory
     # push to db

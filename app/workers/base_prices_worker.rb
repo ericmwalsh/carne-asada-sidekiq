@@ -11,9 +11,7 @@ class BasePricesWorker < ::BaseWorker
     insert_query_array = []
 
     prices.each do |price_hash|
-      if price_hash['symbol'].present? && price_hash['price'].present?
-        insert_query_array << "('#{price_hash['symbol']}', #{price_hash['price']}, #{timestamp})"
-      end
+      insert_query_array << "('#{price_hash['symbol']}', #{price_hash['price']}, #{timestamp})"
     end
 
     execute_query(
