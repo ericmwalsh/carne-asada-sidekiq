@@ -1,83 +1,104 @@
 # ::Binance::SnapshotsWorker
 module Binance
-  class SnapshotsWorker < ::Binance::BaseWorker
+  class SnapshotsWorker < ::BaseSnapshotsWorker
 
-    def perform
-      # query and store in memory
-      # push to db
-      # push to aws
-      snapshots = ::ExchangeWrapper::Binance::Utils.metadata
-      timestamp = Time.now.to_i
+    # ::ExchangeWrapper::Binance::Utils.metadata
+    private
 
-      insert_query_array = []
-      mapped_snapshots = [
-        [
-          'symbol',
-          'price_change',
-          'price_change_percent',
-          'weighted_avg_price',
-          'prev_close_price',
-          'last_price',
-          'last_qty',
-          'bid_price',
-          'bid_qty',
-          'ask_price',
-          'ask_qty',
-          'open_price',
-          'high_price',
-          'low_price',
-          'volume',
-          'quote_volume',
-          'open_time',
-          'close_time',
-          'first_id',
-          'last_id',
-          'count'
-        ]
+    def exchange_name
+      'binance'
+    end
+
+    def file_headers
+      [
+        'symbol',
+        'price_change',
+        'price_change_percent',
+        'weighted_avg_price',
+        'prev_close_price',
+        'last_price',
+        'last_qty',
+        'bid_price',
+        'bid_qty',
+        'ask_price',
+        'ask_qty',
+        'open_price',
+        'high_price',
+        'low_price',
+        'volume',
+        'quote_volume',
+        'open_time',
+        'close_time',
+        'first_id',
+        'last_id',
+        'count'
       ]
+    end
 
-      snapshots.each do |snapshot_hash|
-        insert_query_array << "
-          ('#{snapshot_hash['symbol']}', #{snapshot_hash['priceChange']}, #{snapshot_hash['priceChangePercent']},
-          #{snapshot_hash['weightedAvgPrice']}, #{snapshot_hash['highPrice']}, #{snapshot_hash['lowPrice']},
-          #{snapshot_hash['volume']}, #{snapshot_hash['quoteVolume']}, #{snapshot_hash['openTime']},
-          #{snapshot_hash['closeTime']}, #{snapshot_hash['firstId']}, #{snapshot_hash['lastId']},
-          #{snapshot_hash['count']}, #{timestamp})
-        "
-        mapped_snapshots << [
-          snapshot_hash['symbol'],
-          snapshot_hash['priceChange'],
-          snapshot_hash['priceChangePercent'],
-          snapshot_hash['weightedAvgPrice'],
-          snapshot_hash['prevClosePrice'],
-          snapshot_hash['lastPrice'],
-          snapshot_hash['lastQty'],
-          snapshot_hash['bidPrice'],
-          snapshot_hash['bidQty'],
-          snapshot_hash['askPrice'],
-          snapshot_hash['askQty'],
-          snapshot_hash['openPrice'],
-          snapshot_hash['highPrice'],
-          snapshot_hash['lowPrice'],
-          snapshot_hash['volume'],
-          snapshot_hash['quoteVolume'],
-          snapshot_hash['openTime'],
-          snapshot_hash['closeTime'],
-          snapshot_hash['firstId'],
-          snapshot_hash['lastId'],
-          snapshot_hash['count']
-        ]
-      end
+    def generate_query_clause(snapshot, timestamp) # hash, integer
+      "
+        (
+          '#{snapshot['symbol']}',
+          #{snapshot['priceChange']},
+          #{snapshot['priceChangePercent']},
+          #{snapshot['weightedAvgPrice']},
+          #{snapshot['highPrice']},
+          #{snapshot['lowPrice']},
+          #{snapshot['volume']},
+          #{snapshot['quoteVolume']},
+          #{snapshot['openTime']},
+          #{snapshot['closeTime']},
+          #{snapshot['firstId']},
+          #{snapshot['lastId']},
+          #{snapshot['count']},
+          #{timestamp}
+        )
+      "
+    end
 
-      insert_query = <<~HEREDOC
-        INSERT INTO binance_snapshots (symbol, price_change, price_change_percent, weighted_avg_price, high_price,
-        low_price, volume, quote_volume, open_time, close_time, first_id, last_id, count, timestamp)
-        VALUES #{insert_query_array.join(', ')};
-      HEREDOC
-      filename = "binance/snapshots/#{timestamp}.csv"
+    def generate_file_body(snapshot) # hash
+      [
+        snapshot['symbol'],
+        snapshot['priceChange'],
+        snapshot['priceChangePercent'],
+        snapshot['weightedAvgPrice'],
+        snapshot['prevClosePrice'],
+        snapshot['lastPrice'],
+        snapshot['lastQty'],
+        snapshot['bidPrice'],
+        snapshot['bidQty'],
+        snapshot['askPrice'],
+        snapshot['askQty'],
+        snapshot['openPrice'],
+        snapshot['highPrice'],
+        snapshot['lowPrice'],
+        snapshot['volume'],
+        snapshot['quoteVolume'],
+        snapshot['openTime'],
+        snapshot['closeTime'],
+        snapshot['firstId'],
+        snapshot['lastId'],
+        snapshot['count']
+      ]
+    end
 
-      execute_query(insert_query)
-      upload_to_s3(filename, mapped_snapshots)
+    def table_columns
+      [
+        'symbol',
+        'price_change',
+        'price_change_percent',
+        'weighted_avg_price',
+        'high_price',
+        'low_price',
+        'volume',
+        'quote_volume',
+        'open_time',
+        'close_time',
+        'first_id',
+        'last_id',
+        'count',
+        'timestamp'
+      ]
     end
 
   end

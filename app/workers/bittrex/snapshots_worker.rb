@@ -1,73 +1,80 @@
 # ::Bittrex::SnapshotsWorker
 module Bittrex
-  class SnapshotsWorker < ::Bittrex::BaseWorker
+  class SnapshotsWorker < ::BaseSnapshotsWorker
 
-    def perform
-      # query and store in memory
-      # push to db
-      # push to aws
-      snapshots = ::ExchangeWrapper::Bittrex::Utils.metadata
-      timestamp = Time.now.to_i
+    # ::ExchangeWrapper::Bittrex::Utils.metadata
+    private
 
-      insert_query_array = []
-      mapped_snapshots = [
-        [
-          'symbol',
-          'high',
-          'low',
-          'volume',
-          'last',
-          'base_volume',
-          'bid',
-          'ask',
-          'open_buy_orders',
-          'open_sell_orders',
-          'prev_day'
-        ]
+    def exchange_name
+      'bittrex'
+    end
+
+    def file_headers
+      [
+        'symbol',
+        'high',
+        'low',
+        'volume',
+        'last',
+        'base_volume',
+        'bid',
+        'ask',
+        'open_buy_orders',
+        'open_sell_orders',
+        'prev_day'
       ]
+    end
 
-      snapshots.each do |snapshot_hash|
-        # https://rollbar.com/ericmwalsh/carne-asada-sidekiq/items/7/
-        # restrictions have been loosened for metadata,
-        # only symbol & timestamp must be non-null
-        insert_query_array << "
-          ('#{snapshot_hash['symbol']}',
-          #{prepare_sql_value(snapshot_hash['High'])},
-          #{prepare_sql_value(snapshot_hash['Low'])},
-          #{prepare_sql_value(snapshot_hash['Volume'])},
-          #{prepare_sql_value(snapshot_hash['Last'])},
-          #{prepare_sql_value(snapshot_hash['BaseVolume'])},
-          #{prepare_sql_value(snapshot_hash['Bid'])},
-          #{prepare_sql_value(snapshot_hash['Ask'])},
-          #{prepare_sql_value(snapshot_hash['OpenBuyOrders'])},
-          #{prepare_sql_value(snapshot_hash['OpenSellOrders'])},
-          #{prepare_sql_value(snapshot_hash['PrevDay'])},
-          #{timestamp})
-        "
-        mapped_snapshots << [
-          snapshot_hash['symbol'],
-          snapshot_hash['High'],
-          snapshot_hash['Low'],
-          snapshot_hash['Volume'],
-          snapshot_hash['Last'],
-          snapshot_hash['BaseVolume'],
-          snapshot_hash['Bid'],
-          snapshot_hash['Ask'],
-          snapshot_hash['OpenBuyOrders'],
-          snapshot_hash['OpenSellOrders'],
-          snapshot_hash['PrevDay']
-        ]
-      end
+    def generate_query_clause(snapshot, timestamp) # hash, integer
+      "
+        (
+          '#{snapshot['symbol']}',
+          #{prepare_sql_value(snapshot['High'])},
+          #{prepare_sql_value(snapshot['Low'])},
+          #{prepare_sql_value(snapshot['Volume'])},
+          #{prepare_sql_value(snapshot['Last'])},
+          #{prepare_sql_value(snapshot['BaseVolume'])},
+          #{prepare_sql_value(snapshot['Bid'])},
+          #{prepare_sql_value(snapshot['Ask'])},
+          #{prepare_sql_value(snapshot['OpenBuyOrders'])},
+          #{prepare_sql_value(snapshot['OpenSellOrders'])},
+          #{prepare_sql_value(snapshot['PrevDay'])},
+          #{timestamp}
+        )
+      "
+    end
 
-      insert_query = <<~HEREDOC
-        INSERT INTO bittrex_snapshots (symbol, high, low, volume, last, base_volume,
-        bid, ask, open_buy_orders, open_sell_orders, prev_day, timestamp)
-        VALUES #{insert_query_array.join(', ')};
-      HEREDOC
-      filename = "bittrex/snapshots/#{timestamp}.csv"
+    def generate_file_body(snapshot) # hash
+      [
+        snapshot['symbol'],
+        snapshot['High'],
+        snapshot['Low'],
+        snapshot['Volume'],
+        snapshot['Last'],
+        snapshot['BaseVolume'],
+        snapshot['Bid'],
+        snapshot['Ask'],
+        snapshot['OpenBuyOrders'],
+        snapshot['OpenSellOrders'],
+        snapshot['PrevDay']
+      ]
+    end
 
-      execute_query(insert_query)
-      upload_to_s3(filename, mapped_snapshots)
+    def table_columns
+      [
+        'symbol',
+        'high',
+        'low',
+        'volume',
+        'last',
+        'base_volume',
+        'bid',
+        'ask',
+        'open_buy_orders',
+        'open_sell_orders',
+        'prev_day',
+        'timestamp'
+      ]
     end
 
   end
