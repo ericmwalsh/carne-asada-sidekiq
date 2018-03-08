@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180306032442) do
+ActiveRecord::Schema.define(version: 20180308165859) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,27 @@ ActiveRecord::Schema.define(version: 20180306032442) do
     t.integer "count", null: false
     t.float "timestamp", null: false
     t.index ["symbol", "timestamp"], name: "index_binance_snapshots_on_symbol_and_timestamp", unique: true
+  end
+
+  create_table "bitstamp_prices", id: false, force: :cascade do |t|
+    t.string "symbol", null: false
+    t.float "price", null: false
+    t.float "timestamp", null: false
+    t.index ["symbol", "timestamp"], name: "index_bitstamp_prices_on_symbol_and_timestamp", unique: true
+  end
+
+  create_table "bitstamp_snapshots", id: false, force: :cascade do |t|
+    t.string "symbol", null: false
+    t.float "last", null: false
+    t.float "high", null: false
+    t.float "low", null: false
+    t.float "vwap", null: false
+    t.float "volume", null: false
+    t.float "bid", null: false
+    t.float "ask", null: false
+    t.float "open", null: false
+    t.float "timestamp", null: false
+    t.index ["symbol", "timestamp"], name: "index_bitstamp_snapshots_on_symbol_and_timestamp", unique: true
   end
 
   create_table "bittrex_prices", id: false, force: :cascade do |t|
@@ -91,6 +112,56 @@ ActiveRecord::Schema.define(version: 20180306032442) do
     t.float "best_ask", null: false
     t.float "timestamp", null: false
     t.index ["symbol", "timestamp"], name: "index_gdax_snapshots_on_symbol_and_timestamp", unique: true
+  end
+
+  create_table "gemini_prices", id: false, force: :cascade do |t|
+    t.string "symbol", null: false
+    t.float "price", null: false
+    t.float "timestamp", null: false
+    t.index ["symbol", "timestamp"], name: "index_gemini_prices_on_symbol_and_timestamp", unique: true
+  end
+
+  create_table "gemini_snapshots", id: false, force: :cascade do |t|
+    t.string "symbol", null: false
+    t.float "base_volume", null: false
+    t.float "quote_volume", null: false
+    t.float "bid", null: false
+    t.float "ask", null: false
+    t.float "last", null: false
+    t.float "timestamp", null: false
+    t.index ["symbol", "timestamp"], name: "index_gemini_snapshots_on_symbol_and_timestamp", unique: true
+  end
+
+  create_table "kraken_prices", id: false, force: :cascade do |t|
+    t.string "symbol", null: false
+    t.float "price", null: false
+    t.float "timestamp", null: false
+    t.index ["symbol", "timestamp"], name: "index_kraken_prices_on_symbol_and_timestamp", unique: true
+  end
+
+  create_table "kraken_snapshots", id: false, force: :cascade do |t|
+    t.string "symbol", null: false
+    t.float "ask_price", null: false
+    t.float "ask_whole_lot_volume", null: false
+    t.float "ask_lot_volume", null: false
+    t.float "bid_price", null: false
+    t.float "bid_whole_lot_volume", null: false
+    t.float "bid_lot_volume", null: false
+    t.float "last_price", null: false
+    t.float "last_lot_volume", null: false
+    t.float "volume_today", null: false
+    t.float "volume_last_24h", null: false
+    t.float "vwap_today", null: false
+    t.float "vwap_last_24h", null: false
+    t.float "trades_today", null: false
+    t.float "trades_last_24h", null: false
+    t.float "low_today", null: false
+    t.float "low_last_24h", null: false
+    t.float "high_today", null: false
+    t.float "high_last_24h", null: false
+    t.float "open", null: false
+    t.float "timestamp", null: false
+    t.index ["symbol", "timestamp"], name: "index_kraken_snapshots_on_symbol_and_timestamp", unique: true
   end
 
   create_table "trading_pairs", force: :cascade do |t|

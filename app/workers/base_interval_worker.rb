@@ -4,10 +4,13 @@ class BaseIntervalWorker < ::BaseWorker
   sidekiq_options :queue => 'extract', :retry => false
 
   def perform
+    # hit APIs (or caches)
     symbols_worker.perform_in(5.seconds)
     trading_pairs_worker.perform_in(10.seconds)
+    snapshots_worker.perform_in(15.seconds)
+
+    # doesn't hit APIs
     prices_s3_worker.perform_in(15.seconds)
-    snapshots_worker.perform_in(20.seconds)
   end
 
   private

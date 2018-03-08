@@ -45,15 +45,15 @@ module Gdax
     def generate_file_body(snapshot) # hash
       [
         snapshot['symbol'],
-        snapshot['sequence'].to_f,
-        snapshot['price'].to_f,
-        snapshot['open_24h'].to_f,
-        snapshot['volume_24h'].to_f,
-        snapshot['low_24h'].to_f,
-        snapshot['high_24h'].to_f,
-        snapshot['volume_30d'].to_f,
-        snapshot['best_bid'].to_f,
-        snapshot['best_ask'].to_f,
+        snapshot['sequence'],
+        snapshot['price'],
+        snapshot['open_24h'],
+        snapshot['volume_24h'],
+        snapshot['low_24h'],
+        snapshot['high_24h'],
+        snapshot['volume_30d'],
+        snapshot['best_bid'],
+        snapshot['best_ask'],
       ]
     end
 

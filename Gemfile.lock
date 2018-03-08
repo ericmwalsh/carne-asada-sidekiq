@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/ChalupaIO/exchange_wrapper
-  revision: 9fa05fa42b5336a6352290690a2b0d5143c58075
+  revision: fac05dbc6b1a3a2e681d4dc9aac34b660dffb36e
   specs:
-    exchange_wrapper (0.1.12)
+    exchange_wrapper (0.1.13)
       coinbase (~> 4.2)
       coinbase-exchange (~> 0.2)
       faraday (~> 0.14)
@@ -55,7 +55,7 @@ GEM
       activerecord (>= 3.2, < 6.0)
       rake (>= 10.4, < 13.0)
     arel (8.0.0)
-    aws-partitions (1.69.0)
+    aws-partitions (1.70.0)
     aws-sdk-core (3.17.0)
       aws-partitions (~> 1.0)
       aws-sigv4 (~> 1.0)

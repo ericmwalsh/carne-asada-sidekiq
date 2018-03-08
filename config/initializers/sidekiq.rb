@@ -62,6 +62,48 @@ Sidekiq::Cron::Job.create(
   class: 'Bittrex::IntervalWorker'
 )
 
+# GEMINI
+
+Sidekiq::Cron::Job.create(
+  name: 'Gemini::PricesWorker - every 1min',
+  cron: '*/1 * * * *',
+  class: 'Gemini::PricesWorker'
+)
+
+Sidekiq::Cron::Job.create(
+  name: 'Gemini::IntervalWorker - every 30min',
+  cron: '*/30 * * * *',
+  class: 'Gemini::IntervalWorker'
+)
+
+# KRAKEN
+
+Sidekiq::Cron::Job.create(
+  name: 'Kraken::PricesWorker - every 1min',
+  cron: '*/1 * * * *',
+  class: 'Kraken::PricesWorker'
+)
+
+Sidekiq::Cron::Job.create(
+  name: 'Kraken::IntervalWorker - every 30min',
+  cron: '*/30 * * * *',
+  class: 'Kraken::IntervalWorker'
+)
+
+# BITSTAMP
+
+Sidekiq::Cron::Job.create(
+  name: 'Bitstamp::PricesWorker - every 1min',
+  cron: '*/1 * * * *',
+  class: 'Bitstamp::PricesWorker'
+)
+
+Sidekiq::Cron::Job.create(
+  name: 'Bitstamp::IntervalWorker - every 30min',
+  cron: '*/30 * * * *',
+  class: 'Bitstamp::IntervalWorker'
+)
+
 #####
 
 # Sidekiq::Cron::Job.create(
