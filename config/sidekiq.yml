@@ -1,5 +1,5 @@
 # https://github.com/mperham/sidekiq/wiki/Problems-and-Troubleshooting
-:concurrency: 5
+:concurrency: 20
 :queues:
   - extract
   - transform
