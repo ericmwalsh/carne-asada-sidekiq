@@ -186,8 +186,8 @@ Sidekiq::Cron::Job.create(
   class: 'Poloniex::PricesWorker'
 )
 
-# Sidekiq::Cron::Job.create(
-#   name: 'Poloniex::IntervalWorker - every 30min',
-#   cron: '*/30 * * * *',
-#   class: 'Poloniex::IntervalWorker'
-# )
+Sidekiq::Cron::Job.create(
+  name: 'Poloniex::IntervalWorker - every 30min',
+  cron: '*/30 * * * *',
+  class: 'Poloniex::IntervalWorker'
+)
