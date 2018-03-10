@@ -88,11 +88,11 @@ Sidekiq::Cron::Job.create(
   class: 'Cryptopia::PricesWorker'
 )
 
-# Sidekiq::Cron::Job.create(
-#   name: 'Cryptopia::IntervalWorker - every 30min',
-#   cron: '*/30 * * * *',
-#   class: 'Cryptopia::IntervalWorker'
-# )
+Sidekiq::Cron::Job.create(
+  name: 'Cryptopia::IntervalWorker - every 30min',
+  cron: '*/30 * * * *',
+  class: 'Cryptopia::IntervalWorker'
+)
 
 # 8. GATEIO
 
