@@ -158,11 +158,11 @@ Sidekiq::Cron::Job.create(
   class: 'Kucoin::PricesWorker'
 )
 
-# Sidekiq::Cron::Job.create(
-#   name: 'Kucoin::IntervalWorker - every 30min',
-#   cron: '*/30 * * * *',
-#   class: 'Kucoin::IntervalWorker'
-# )
+Sidekiq::Cron::Job.create(
+  name: 'Kucoin::IntervalWorker - every 30min',
+  cron: '*/30 * * * *',
+  class: 'Kucoin::IntervalWorker'
+)
 
 # 13. MERCATOX
 

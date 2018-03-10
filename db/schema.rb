@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180310204144) do
+ActiveRecord::Schema.define(version: 20180310204931) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -238,6 +238,23 @@ ActiveRecord::Schema.define(version: 20180310204144) do
     t.float "price", null: false
     t.float "timestamp", null: false
     t.index ["symbol", "timestamp"], name: "index_kucoin_prices_on_symbol_and_timestamp", unique: true
+  end
+
+  create_table "kucoin_snapshots", id: false, force: :cascade do |t|
+    t.string "symbol", null: false
+    t.float "last_deal_price"
+    t.float "buy"
+    t.float "sell"
+    t.float "change"
+    t.float "sort"
+    t.float "fee_rate"
+    t.float "vol_value"
+    t.float "high"
+    t.float "vol"
+    t.float "low"
+    t.float "change_rate"
+    t.float "timestamp", null: false
+    t.index ["symbol", "timestamp"], name: "index_kucoin_snapshots_on_symbol_and_timestamp", unique: true
   end
 
   create_table "mercatox_prices", id: false, force: :cascade do |t|
