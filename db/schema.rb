@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180310202522) do
+ActiveRecord::Schema.define(version: 20180310204144) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -145,6 +145,20 @@ ActiveRecord::Schema.define(version: 20180310202522) do
     t.float "price", null: false
     t.float "timestamp", null: false
     t.index ["symbol", "timestamp"], name: "index_gateio_prices_on_symbol_and_timestamp", unique: true
+  end
+
+  create_table "gateio_snapshots", id: false, force: :cascade do |t|
+    t.string "symbol", null: false
+    t.float "last", null: false
+    t.float "lowest_ask", null: false
+    t.float "highest_bid", null: false
+    t.float "percent_change", null: false
+    t.float "base_volume", null: false
+    t.float "quote_volume", null: false
+    t.float "high_24_hr", null: false
+    t.float "low_24_hr", null: false
+    t.float "timestamp", null: false
+    t.index ["symbol", "timestamp"], name: "index_gateio_snapshots_on_symbol_and_timestamp", unique: true
   end
 
   create_table "gdax_prices", id: false, force: :cascade do |t|

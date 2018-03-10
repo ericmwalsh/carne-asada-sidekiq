@@ -102,11 +102,11 @@ Sidekiq::Cron::Job.create(
   class: 'Gateio::PricesWorker'
 )
 
-# Sidekiq::Cron::Job.create(
-#   name: 'Gateio::IntervalWorker - every 30min',
-#   cron: '*/30 * * * *',
-#   class: 'Gateio::IntervalWorker'
-# )
+Sidekiq::Cron::Job.create(
+  name: 'Gateio::IntervalWorker - every 30min',
+  cron: '*/30 * * * *',
+  class: 'Gateio::IntervalWorker'
+)
 
 # 9. GDAX
 
