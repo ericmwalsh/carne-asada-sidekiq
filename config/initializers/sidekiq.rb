@@ -172,11 +172,11 @@ Sidekiq::Cron::Job.create(
   class: 'Mercatox::PricesWorker'
 )
 
-# Sidekiq::Cron::Job.create(
-#   name: 'Mercatox::IntervalWorker - every 30min',
-#   cron: '*/30 * * * *',
-#   class: 'Mercatox::IntervalWorker'
-# )
+Sidekiq::Cron::Job.create(
+  name: 'Mercatox::IntervalWorker - every 30min',
+  cron: '*/30 * * * *',
+  class: 'Mercatox::IntervalWorker'
+)
 
 # 14. POLONIEX
 

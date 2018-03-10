@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180310204931) do
+ActiveRecord::Schema.define(version: 20180310211311) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -262,6 +262,20 @@ ActiveRecord::Schema.define(version: 20180310204931) do
     t.float "price", null: false
     t.float "timestamp", null: false
     t.index ["symbol", "timestamp"], name: "index_mercatox_prices_on_symbol_and_timestamp", unique: true
+  end
+
+  create_table "mercatox_snapshots", id: false, force: :cascade do |t|
+    t.string "symbol", null: false
+    t.float "last"
+    t.float "low_24_hr"
+    t.float "high_24_hr"
+    t.float "percent_change"
+    t.float "base_volume"
+    t.float "quote_volume"
+    t.float "lowest_ask"
+    t.float "highest_bid"
+    t.float "timestamp", null: false
+    t.index ["symbol", "timestamp"], name: "index_mercatox_snapshots_on_symbol_and_timestamp", unique: true
   end
 
   create_table "poloniex_prices", id: false, force: :cascade do |t|
