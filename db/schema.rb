@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180310231124) do
+ActiveRecord::Schema.define(version: 20180313055728) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -138,6 +138,13 @@ ActiveRecord::Schema.define(version: 20180310231124) do
     t.float "deleted_timestamp"
     t.index ["exchange", "deleted_timestamp"], name: "index_currencies_on_exchange_and_deleted_timestamp"
     t.index ["exchange", "symbol"], name: "index_currencies_on_exchange_and_symbol", unique: true
+  end
+
+  create_table "currency_prices", id: false, force: :cascade do |t|
+    t.string "symbol", null: false
+    t.float "timestamp", null: false
+    t.float "price_usd", null: false
+    t.index ["symbol", "timestamp"], name: "index_currency_prices_on_symbol_and_timestamp", unique: true
   end
 
   create_table "gateio_prices", id: false, force: :cascade do |t|
@@ -297,6 +304,14 @@ ActiveRecord::Schema.define(version: 20180310231124) do
     t.float "low_24_hr", null: false
     t.float "timestamp", null: false
     t.index ["symbol", "timestamp"], name: "index_poloniex_snapshots_on_symbol_and_timestamp", unique: true
+  end
+
+  create_table "trading_pair_prices", id: false, force: :cascade do |t|
+    t.string "exchange", null: false
+    t.string "symbol", null: false
+    t.float "timestamp", null: false
+    t.float "price_usd", null: false
+    t.index ["exchange", "symbol", "timestamp"], name: "index_trading_pair_prices_on_exchange_and_symbol_and_timestamp", unique: true
   end
 
   create_table "trading_pairs", force: :cascade do |t|
