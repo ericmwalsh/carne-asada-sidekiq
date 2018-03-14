@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180313060414) do
+ActiveRecord::Schema.define(version: 20180314172832) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -322,6 +322,20 @@ ActiveRecord::Schema.define(version: 20180313060414) do
     t.float "deleted_timestamp"
     t.index ["exchange", "deleted_timestamp"], name: "index_trading_pairs_on_exchange_and_deleted_timestamp"
     t.index ["exchange", "symbol"], name: "index_trading_pairs_on_exchange_and_symbol", unique: true
+  end
+
+  create_table "usd_conversions", id: false, force: :cascade do |t|
+    t.float "aud"
+    t.float "cad"
+    t.float "cny"
+    t.float "eur"
+    t.float "gbp"
+    t.float "jpy"
+    t.float "krw"
+    t.float "nzd"
+    t.float "rub"
+    t.float "timestamp", null: false
+    t.index ["timestamp"], name: "index_usd_conversions_on_timestamp", unique: true
   end
 
 end
