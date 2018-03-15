@@ -191,3 +191,11 @@ Sidekiq::Cron::Job.create(
   cron: '*/30 * * * *',
   class: 'Poloniex::IntervalWorker'
 )
+
+# Conversions - USD
+
+Sidekiq::Cron::Job.create(
+  name: 'Conversions::UsdWorker - every day at 00:30',
+  cron: '30 0 * * *',
+  class: 'Conversions::UsdWorker'
+)
