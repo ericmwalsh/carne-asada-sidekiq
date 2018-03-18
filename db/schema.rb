@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180314172832) do
+ActiveRecord::Schema.define(version: 20180318173534) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,14 @@ ActiveRecord::Schema.define(version: 20180314172832) do
     t.index ["symbol", "timestamp"], name: "index_binance_snapshots_on_symbol_and_timestamp", unique: true
   end
 
+  create_table "binance_volumes", id: false, force: :cascade do |t|
+    t.string "symbol", null: false
+    t.float "base_volume", null: false
+    t.float "quote_volume", null: false
+    t.float "timestamp", null: false
+    t.index ["symbol", "timestamp"], name: "index_binance_volumes_on_symbol_and_timestamp", unique: true
+  end
+
   create_table "bitstamp_prices", id: false, force: :cascade do |t|
     t.string "symbol", null: false
     t.float "price", null: false
@@ -59,6 +67,14 @@ ActiveRecord::Schema.define(version: 20180314172832) do
     t.float "open", null: false
     t.float "timestamp", null: false
     t.index ["symbol", "timestamp"], name: "index_bitstamp_snapshots_on_symbol_and_timestamp", unique: true
+  end
+
+  create_table "bitstamp_volumes", id: false, force: :cascade do |t|
+    t.string "symbol", null: false
+    t.float "base_volume", null: false
+    t.float "quote_volume", null: false
+    t.float "timestamp", null: false
+    t.index ["symbol", "timestamp"], name: "index_bitstamp_volumes_on_symbol_and_timestamp", unique: true
   end
 
   create_table "bittrex_prices", id: false, force: :cascade do |t|
@@ -84,6 +100,14 @@ ActiveRecord::Schema.define(version: 20180314172832) do
     t.index ["symbol", "timestamp"], name: "index_bittrex_snapshots_on_symbol_and_timestamp", unique: true
   end
 
+  create_table "bittrex_volumes", id: false, force: :cascade do |t|
+    t.string "symbol", null: false
+    t.float "base_volume", null: false
+    t.float "quote_volume", null: false
+    t.float "timestamp", null: false
+    t.index ["symbol", "timestamp"], name: "index_bittrex_volumes_on_symbol_and_timestamp", unique: true
+  end
+
   create_table "cexio_prices", id: false, force: :cascade do |t|
     t.string "symbol", null: false
     t.float "price", null: false
@@ -102,6 +126,14 @@ ActiveRecord::Schema.define(version: 20180314172832) do
     t.float "volume_30_d", null: false
     t.float "timestamp", null: false
     t.index ["symbol", "timestamp"], name: "index_cexio_snapshots_on_symbol_and_timestamp", unique: true
+  end
+
+  create_table "cexio_volumes", id: false, force: :cascade do |t|
+    t.string "symbol", null: false
+    t.float "base_volume", null: false
+    t.float "quote_volume", null: false
+    t.float "timestamp", null: false
+    t.index ["symbol", "timestamp"], name: "index_cexio_volumes_on_symbol_and_timestamp", unique: true
   end
 
   create_table "cryptopia_prices", id: false, force: :cascade do |t|
@@ -130,6 +162,14 @@ ActiveRecord::Schema.define(version: 20180314172832) do
     t.float "sell_base_volume", null: false
     t.float "timestamp", null: false
     t.index ["symbol", "timestamp"], name: "index_cryptopia_snapshots_on_symbol_and_timestamp", unique: true
+  end
+
+  create_table "cryptopia_volumes", id: false, force: :cascade do |t|
+    t.string "symbol", null: false
+    t.float "base_volume", null: false
+    t.float "quote_volume", null: false
+    t.float "timestamp", null: false
+    t.index ["symbol", "timestamp"], name: "index_cryptopia_volumes_on_symbol_and_timestamp", unique: true
   end
 
   create_table "currencies", force: :cascade do |t|
@@ -168,6 +208,14 @@ ActiveRecord::Schema.define(version: 20180314172832) do
     t.index ["symbol", "timestamp"], name: "index_gateio_snapshots_on_symbol_and_timestamp", unique: true
   end
 
+  create_table "gateio_volumes", id: false, force: :cascade do |t|
+    t.string "symbol", null: false
+    t.float "base_volume", null: false
+    t.float "quote_volume", null: false
+    t.float "timestamp", null: false
+    t.index ["symbol", "timestamp"], name: "index_gateio_volumes_on_symbol_and_timestamp", unique: true
+  end
+
   create_table "gdax_prices", id: false, force: :cascade do |t|
     t.string "symbol", null: false
     t.float "price", null: false
@@ -190,6 +238,14 @@ ActiveRecord::Schema.define(version: 20180314172832) do
     t.index ["symbol", "timestamp"], name: "index_gdax_snapshots_on_symbol_and_timestamp", unique: true
   end
 
+  create_table "gdax_volumes", id: false, force: :cascade do |t|
+    t.string "symbol", null: false
+    t.float "base_volume", null: false
+    t.float "quote_volume", null: false
+    t.float "timestamp", null: false
+    t.index ["symbol", "timestamp"], name: "index_gdax_volumes_on_symbol_and_timestamp", unique: true
+  end
+
   create_table "gemini_prices", id: false, force: :cascade do |t|
     t.string "symbol", null: false
     t.float "price", null: false
@@ -206,6 +262,14 @@ ActiveRecord::Schema.define(version: 20180314172832) do
     t.float "last", null: false
     t.float "timestamp", null: false
     t.index ["symbol", "timestamp"], name: "index_gemini_snapshots_on_symbol_and_timestamp", unique: true
+  end
+
+  create_table "gemini_volumes", id: false, force: :cascade do |t|
+    t.string "symbol", null: false
+    t.float "base_volume", null: false
+    t.float "quote_volume", null: false
+    t.float "timestamp", null: false
+    t.index ["symbol", "timestamp"], name: "index_gemini_volumes_on_symbol_and_timestamp", unique: true
   end
 
   create_table "kraken_prices", id: false, force: :cascade do |t|
@@ -240,6 +304,14 @@ ActiveRecord::Schema.define(version: 20180314172832) do
     t.index ["symbol", "timestamp"], name: "index_kraken_snapshots_on_symbol_and_timestamp", unique: true
   end
 
+  create_table "kraken_volumes", id: false, force: :cascade do |t|
+    t.string "symbol", null: false
+    t.float "base_volume", null: false
+    t.float "quote_volume", null: false
+    t.float "timestamp", null: false
+    t.index ["symbol", "timestamp"], name: "index_kraken_volumes_on_symbol_and_timestamp", unique: true
+  end
+
   create_table "kucoin_prices", id: false, force: :cascade do |t|
     t.string "symbol", null: false
     t.float "price", null: false
@@ -264,6 +336,14 @@ ActiveRecord::Schema.define(version: 20180314172832) do
     t.index ["symbol", "timestamp"], name: "index_kucoin_snapshots_on_symbol_and_timestamp", unique: true
   end
 
+  create_table "kucoin_volumes", id: false, force: :cascade do |t|
+    t.string "symbol", null: false
+    t.float "base_volume", null: false
+    t.float "quote_volume", null: false
+    t.float "timestamp", null: false
+    t.index ["symbol", "timestamp"], name: "index_kucoin_volumes_on_symbol_and_timestamp", unique: true
+  end
+
   create_table "mercatox_prices", id: false, force: :cascade do |t|
     t.string "symbol", null: false
     t.float "price", null: false
@@ -285,6 +365,14 @@ ActiveRecord::Schema.define(version: 20180314172832) do
     t.index ["symbol", "timestamp"], name: "index_mercatox_snapshots_on_symbol_and_timestamp", unique: true
   end
 
+  create_table "mercatox_volumes", id: false, force: :cascade do |t|
+    t.string "symbol", null: false
+    t.float "base_volume", null: false
+    t.float "quote_volume", null: false
+    t.float "timestamp", null: false
+    t.index ["symbol", "timestamp"], name: "index_mercatox_volumes_on_symbol_and_timestamp", unique: true
+  end
+
   create_table "poloniex_prices", id: false, force: :cascade do |t|
     t.string "symbol", null: false
     t.float "price", null: false
@@ -304,6 +392,14 @@ ActiveRecord::Schema.define(version: 20180314172832) do
     t.float "low_24_hr", null: false
     t.float "timestamp", null: false
     t.index ["symbol", "timestamp"], name: "index_poloniex_snapshots_on_symbol_and_timestamp", unique: true
+  end
+
+  create_table "poloniex_volumes", id: false, force: :cascade do |t|
+    t.string "symbol", null: false
+    t.float "base_volume", null: false
+    t.float "quote_volume", null: false
+    t.float "timestamp", null: false
+    t.index ["symbol", "timestamp"], name: "index_poloniex_volumes_on_symbol_and_timestamp", unique: true
   end
 
   create_table "trading_pair_prices", id: false, force: :cascade do |t|
