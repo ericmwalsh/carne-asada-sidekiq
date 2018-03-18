@@ -6,7 +6,7 @@ class BaseExtractWorker < ::BaseWorker
   def perform
     # hit APIs (or caches)
     prices_worker.perform_async
-    volumes_worker.perform_in(5.seconds)
+    volumes_worker.perform_in(10.seconds)
   end
 
   private

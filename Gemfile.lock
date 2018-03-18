@@ -1,18 +1,6 @@
-GIT
-  remote: https://github.com/ChalupaIO/exchange_wrapper
-  revision: 868872d280f0657ef0f1bbbb66fb9012b67160c9
-  specs:
-    exchange_wrapper (0.1.13)
-      activesupport (~> 5.1)
-      coinbase (~> 4.2)
-      coinbase-exchange (~> 0.2)
-      faraday (~> 0.14)
-      faraday_middleware (~> 0.12)
-      httparty (~> 0.16)
-      oj (~> 3)
-
 GEM
   remote: https://rubygems.org/
+  remote: https://HDr58rRVmJU5Hg5v82bS@gem.fury.io/chalupaio/
   specs:
     actioncable (5.1.5)
       actionpack (= 5.1.5)
@@ -116,6 +104,14 @@ GEM
     et-orbi (1.0.9)
       tzinfo
     eventmachine (1.2.5)
+    exchange_wrapper (0.1.14)
+      activesupport (~> 5.1)
+      coinbase (~> 4.2)
+      coinbase-exchange (~> 0.2)
+      faraday (~> 0.14)
+      faraday_middleware (~> 0.12)
+      httparty (~> 0.16)
+      oj (~> 3)
     execjs (2.7.0)
     faraday (0.14.0)
       multipart-post (>= 1.2, < 3)

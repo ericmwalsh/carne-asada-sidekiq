@@ -42,7 +42,9 @@ gem 'oj'
 gem 'redis-rails'
 
 # EXCHANGES
-gem 'exchange_wrapper', git: 'https://github.com/ChalupaIO/exchange_wrapper'
+source 'https://HDr58rRVmJU5Hg5v82bS@gem.fury.io/chalupaio/' do
+  gem 'exchange_wrapper'
+end
 
 # gem 's3'
 gem 'aws-sdk-s3', '~> 1'
