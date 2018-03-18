@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/ChalupaIO/exchange_wrapper
-  revision: 5fea7b42da8097a8837024948c23766e4814cb5b
+  revision: 868872d280f0657ef0f1bbbb66fb9012b67160c9
   specs:
     exchange_wrapper (0.1.13)
       activesupport (~> 5.1)

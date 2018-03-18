@@ -11,6 +11,7 @@ class BaseIntervalWorker < ::BaseWorker
 
     # doesn't hit APIs
     prices_s3_worker.perform_in(15.seconds)
+    volumes_s3_worker.perform_in(20.seconds)
   end
 
   private
@@ -27,12 +28,16 @@ class BaseIntervalWorker < ::BaseWorker
     "::#{exchange_name.capitalize}::TradingPairsWorker".constantize
   end
 
+  def snapshots_worker
+    "::#{exchange_name.capitalize}::SnapshotsWorker".constantize
+  end
+
   def prices_s3_worker
     "::#{exchange_name.capitalize}::PricesS3Worker".constantize
   end
 
-  def snapshots_worker
-    "::#{exchange_name.capitalize}::SnapshotsWorker".constantize
+  def volumes_s3_worker
+    "::#{exchange_name.capitalize}::VolumesS3Worker".constantize
   end
 
 end

@@ -23,9 +23,9 @@ end
 # 1. BINANCE
 
 Sidekiq::Cron::Job.create(
-  name: 'Binance::PricesWorker - every 1min',
+  name: 'Binance::ExtractWorker - every 1min',
   cron: '*/1 * * * *',
-  class: 'Binance::PricesWorker'
+  class: 'Binance::ExtractWorker'
 )
 
 Sidekiq::Cron::Job.create(
@@ -37,9 +37,9 @@ Sidekiq::Cron::Job.create(
 # 2. BITSTAMP
 
 Sidekiq::Cron::Job.create(
-  name: 'Bitstamp::PricesWorker - every 1min',
+  name: 'Bitstamp::ExtractWorker - every 1min',
   cron: '*/1 * * * *',
-  class: 'Bitstamp::PricesWorker'
+  class: 'Bitstamp::ExtractWorker'
 )
 
 Sidekiq::Cron::Job.create(
@@ -51,9 +51,9 @@ Sidekiq::Cron::Job.create(
 # 3. BITTREX
 
 Sidekiq::Cron::Job.create(
-  name: 'Bittrex::PricesWorker - every 1min',
+  name: 'Bittrex::ExtractWorker - every 1min',
   cron: '*/1 * * * *',
-  class: 'Bittrex::PricesWorker'
+  class: 'Bittrex::ExtractWorker'
 )
 
 Sidekiq::Cron::Job.create(
@@ -65,9 +65,9 @@ Sidekiq::Cron::Job.create(
 # 4. CEXIO
 
 Sidekiq::Cron::Job.create(
-  name: 'Cexio::PricesWorker - every 1min',
+  name: 'Cexio::ExtractWorker - every 1min',
   cron: '*/1 * * * *',
-  class: 'Cexio::PricesWorker'
+  class: 'Cexio::ExtractWorker'
 )
 
 Sidekiq::Cron::Job.create(
@@ -83,9 +83,9 @@ Sidekiq::Cron::Job.create(
 # 7. CRYPTOPIA
 
 Sidekiq::Cron::Job.create(
-  name: 'Cryptopia::PricesWorker - every 1min',
+  name: 'Cryptopia::ExtractWorker - every 1min',
   cron: '*/1 * * * *',
-  class: 'Cryptopia::PricesWorker'
+  class: 'Cryptopia::ExtractWorker'
 )
 
 Sidekiq::Cron::Job.create(
@@ -97,9 +97,9 @@ Sidekiq::Cron::Job.create(
 # 8. GATEIO
 
 Sidekiq::Cron::Job.create(
-  name: 'Gateio::PricesWorker - every 1min',
+  name: 'Gateio::ExtractWorker - every 1min',
   cron: '*/1 * * * *',
-  class: 'Gateio::PricesWorker'
+  class: 'Gateio::ExtractWorker'
 )
 
 Sidekiq::Cron::Job.create(
@@ -111,9 +111,9 @@ Sidekiq::Cron::Job.create(
 # 9. GDAX
 
 Sidekiq::Cron::Job.create(
-  name: 'Gdax::PricesWorker - every 1min',
+  name: 'Gdax::ExtractWorker - every 1min',
   cron: '*/1 * * * *',
-  class: 'Gdax::PricesWorker'
+  class: 'Gdax::ExtractWorker'
 )
 
 Sidekiq::Cron::Job.create(
@@ -125,9 +125,9 @@ Sidekiq::Cron::Job.create(
 # 10. GEMINI
 
 Sidekiq::Cron::Job.create(
-  name: 'Gemini::PricesWorker - every 1min',
+  name: 'Gemini::ExtractWorker - every 1min',
   cron: '*/1 * * * *',
-  class: 'Gemini::PricesWorker'
+  class: 'Gemini::ExtractWorker'
 )
 
 Sidekiq::Cron::Job.create(
@@ -139,9 +139,9 @@ Sidekiq::Cron::Job.create(
 # 11. KRAKEN
 
 Sidekiq::Cron::Job.create(
-  name: 'Kraken::PricesWorker - every 1min',
+  name: 'Kraken::ExtractWorker - every 1min',
   cron: '*/1 * * * *',
-  class: 'Kraken::PricesWorker'
+  class: 'Kraken::ExtractWorker'
 )
 
 Sidekiq::Cron::Job.create(
@@ -153,9 +153,9 @@ Sidekiq::Cron::Job.create(
 # 12. KUCOIN
 
 Sidekiq::Cron::Job.create(
-  name: 'Kucoin::PricesWorker - every 1min',
+  name: 'Kucoin::ExtractWorker - every 1min',
   cron: '*/1 * * * *',
-  class: 'Kucoin::PricesWorker'
+  class: 'Kucoin::ExtractWorker'
 )
 
 Sidekiq::Cron::Job.create(
@@ -167,9 +167,9 @@ Sidekiq::Cron::Job.create(
 # 13. MERCATOX
 
 Sidekiq::Cron::Job.create(
-  name: 'Mercatox::PricesWorker - every 1min',
+  name: 'Mercatox::ExtractWorker - every 1min',
   cron: '*/1 * * * *',
-  class: 'Mercatox::PricesWorker'
+  class: 'Mercatox::ExtractWorker'
 )
 
 Sidekiq::Cron::Job.create(
@@ -181,9 +181,9 @@ Sidekiq::Cron::Job.create(
 # 14. POLONIEX
 
 Sidekiq::Cron::Job.create(
-  name: 'Poloniex::PricesWorker - every 1min',
+  name: 'Poloniex::ExtractWorker - every 1min',
   cron: '*/1 * * * *',
-  class: 'Poloniex::PricesWorker'
+  class: 'Poloniex::ExtractWorker'
 )
 
 Sidekiq::Cron::Job.create(
