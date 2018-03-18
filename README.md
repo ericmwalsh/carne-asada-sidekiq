@@ -7,7 +7,7 @@ This app, CAS, is a job framework that is used to parse pricing data from the di
 
 ## Setup Instructions
 
-I recommend you use [RVM](https://rvm.io/)...The app is using Ruby 2.4.3, I call my gemset `carne-asada`.
+I recommend you use [RVM](https://rvm.io/)...The app is using Ruby 2.5.0, I call my gemset `carne-asada`.
 
 
 Get it from GitHub
