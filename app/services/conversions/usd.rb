@@ -20,9 +20,10 @@ module Conversions
 
     class << self
 
+      # unsafe, API runs into rate_date issues
       def store_latest(api_key = API_KEY, currencies = CURRENCIES) # string
         rates = get_latest(api_key)
-        rate_date = Time.at((rates['timestamp'].to_i / 86400).floor * 86400).utc
+        rate_date = Time.at(rates['timestamp'].to_i).utc.beginning_of_day
         if rate_date != Time.now.utc.beginning_of_day
           raise ::Exceptions::ApiServerError.new(
             rates.merge('message' => 'Response date is not equal to input date'),
@@ -54,7 +55,7 @@ module Conversions
 
       def store_historical(date, currencies = CURRENCIES, api_key = API_KEY) # string, array of strings, string
         historical_rates = get_historical(date, currencies, api_key)
-        rate_date = Time.at((historical_rates['timestamp'].to_i / 86400).floor * 86400).utc
+        rate_date = Time.at(historical_rates['timestamp'].to_i).utc.beginning_of_day
         if rate_date.strftime('%Y-%m-%d') != date
           raise ::Exceptions::ApiServerError.new(
             historical_rates.merge('message' => 'Response date is not equal to input date'),
