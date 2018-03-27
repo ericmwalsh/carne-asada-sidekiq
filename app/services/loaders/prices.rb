@@ -3,39 +3,6 @@ module Loaders
   class Prices
     extend ::Helpers
 
-    CURRENCIES_BY_VOLUME = [
-      'BTC',
-      'ETH',
-      'XRP',
-      'BCH',
-      'LTC',
-      'ADA',
-      'NEO',
-      'XLM',
-      'EOS',
-      'XEM',
-      'XMR',
-      'DASH',
-      'IOTA',
-      'USDT',
-      'TRX',
-      'VEN',
-      'ETC',
-      'NANO',
-      'LSK',
-      'QTUM',
-      'OMG',
-      'BTG',
-      'ICX',
-      'BNB',
-      'ZEC',
-      'DOGE',
-      'KCS',
-      'XAUR',
-      'NZDT',
-      'SNET'
-    ]
-
     class << self
       # ::Loaders::Prices.load_prices(1520826900, 1520827200)
       # starting_time, ending_time, minute_interval

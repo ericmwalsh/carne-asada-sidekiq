@@ -3,11 +3,6 @@ module Loaders
   class DeterminePrices
     extend ::Helpers
 
-    ALIASES = {
-      'XBT' => 'BTC',
-      'XRB' => 'NANO'
-    }
-
     class << self
       #
       # {"AUD"=>1.270106, "CAD"=>1.2843, "CNY"=>6.326903, "EUR"=>0.810204, "GBP"=>0.71912, "JPY"=>106.279999, "KRW"=>1063.369995, "NZD"=>1.369397, "RUB"=>56.860106}
