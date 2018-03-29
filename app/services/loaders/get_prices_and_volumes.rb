@@ -33,8 +33,40 @@ module Loaders
           exchange_map[price_hash['exchange']][price_hash['times'].to_i] = true
           grouped_prices[price_hash['times'].to_i].push(price_hash)
         end
+        missing_price_map = determine_missing_prices(exchange_map)
+        grouped_prices = fill_missing_prices(grouped_prices, missing_price_map)
 
         grouped_prices
+      end
+
+      def determine_missing_prices(exchange_map) # hash
+        missing_price_map = {}
+        exchange_map.values.first.keys.each do |timestamp|
+          missing_price_map[timestamp] = []
+        end
+
+        exchange_map.each do |exchange, timestamp_map|
+          timestamp_map.each do |timestamp, values_present|
+            unless values_present
+              missing_price_map[timestamp] << exchange
+            end
+          end
+        end
+
+        missing_price_map
+      end
+
+      def fill_missing_prices(grouped_prices, missing_price_map) # hash, hash
+        filled_prices = {}
+        missing_prices = {}
+
+        count = 0
+        missing_price_map.each do |timestamp, exchange_array|
+          #
+        end
+
+        filled_prices
+        grouped_prices # temp
       end
 
       # ::Loaders::GetPricesAndVolumes.send(:load_prices, 1521516300, 1521516600, 1)
