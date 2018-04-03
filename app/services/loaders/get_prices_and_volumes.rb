@@ -13,17 +13,13 @@ module Loaders
         prices = ensure_prices(st, et, intvl)
         volumes = ensure_volumes(st, et, intvl)
 
-        # merge_prices_and_volumes(prices, volumes)
-
-        prices
-        volumes
+        [
+          prices,
+          volumes
+        ]
       end
 
       private
-
-      def merge_prices_and_volumes(prices, volumes) # hash, hash
-        #
-      end
 
       # ::Loaders::GetPricesAndVolumes.send(:ensure_prices, 1521516300, 1521516600, 1)
       def ensure_prices(st, et, intvl)  # int, int, int
