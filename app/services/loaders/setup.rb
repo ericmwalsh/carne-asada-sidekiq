@@ -41,8 +41,8 @@ module Loaders
         volume_map = {}
         volumes.each do |volume_hash|
           volume_map["#{volume_hash['exchange']}-#{volume_hash['symbol']}"] = {
-            'mbv' => volume_hash['mbv'],
-            'mqv' => volume_hash['mqv']
+            'base_volume' => volume_hash['base_volume'],
+            'quote_volume' => volume_hash['quote_volume']
           }
         end
 

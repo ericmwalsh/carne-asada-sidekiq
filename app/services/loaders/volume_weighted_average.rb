@@ -5,7 +5,7 @@ module Loaders
 
     class << self
 
-      # [..., {"exchange"=>"poloniex", "symbol"=>"ZRX/ETH", "base_asset"=>"ZRX", "quote_asset"=>"ETH", "times"=>1521724860, "avgp"=>0.00116609, "mbv"=>135942.97719985, "mqv"=>144.2767299}, ...]
+      # [..., {"exchange"=>"poloniex", "symbol"=>"ZRX/ETH", "base_asset"=>"ZRX", "quote_asset"=>"ETH", "times"=>1521724860, "price"=>0.00116609, "base_volume"=>135942.97719985, "quote_volume"=>144.2767299}, ...]
       # {"AUD"=>1.270106, "CAD"=>1.2843, "CNY"=>6.326903, "EUR"=>0.810204, "GBP"=>0.71912, "JPY"=>106.279999, "KRW"=>1063.369995, "NZD"=>1.369397, "RUB"=>56.860106}
       # ["USDT", "NZDT", "BTC", "XBT", "ETH", "BCH", "LTC", "NEO", "XMR", "QTUM", "BNB", "DOGE", "KCS", "XAUR", "SNET"]
       def perform(pvs, fiat_currencies, base_currencies) # arr of hashes, hash, arr
@@ -21,7 +21,7 @@ module Loaders
         # split into groups
         pvs.each do |market_hash|
           # filter out markets with bad price
-          next if market_hash['avgp'] == 0
+          next if market_hash['price'] == 0
           # deal with aliases
           encode_alias!(market_hash)
 
@@ -30,7 +30,7 @@ module Loaders
             # i.e. {"exchange"=>"bitstamp","symbol"=>"EUR/USD","base_asset"=>"EUR","quote_asset"=>"USD","times"=>1520826960.0,"price"=>1.2294}
             unless fiats.include? market_hash['base_asset']
               converted_market_hash = market_hash.merge(
-                'converted' => market_hash['avgp'].to_f * (1 / fiat_currencies[market_hash['quote_asset']].to_f)
+                'converted' => market_hash['price'].to_f * (1 / fiat_currencies[market_hash['quote_asset']].to_f)
               )
 
               if convert_hash[market_hash['base_asset']].present?
@@ -64,7 +64,7 @@ module Loaders
 
               # now quote_asset must == bc
               converted_market_hash = market_hash.merge(
-                'converted' => market_hash['avgp'].to_f * bc_value
+                'converted' => market_hash['price'].to_f * bc_value
               )
 
               if convert_hash[market_hash['base_asset']].present?
@@ -96,8 +96,8 @@ module Loaders
               'aliased' => market_hash['aliased'].present?,
               'outlier' => market_hash['outlier'].present?,
               'value' => market_hash['converted'],
-              'base_volume' => market_hash['mbv'],
-              'quote_volume' => market_hash['mqv']
+              'base_volume' => market_hash['base_volume'],
+              'quote_volume' => market_hash['quote_volume']
             }
 
             if converted_markets[market_hash['exchange']].present?
@@ -135,7 +135,7 @@ module Loaders
             # unflip
             flip_market_pair!(market_hash)
             if market_hash['converted'].present?
-              market_hash['converted'] = market_hash['avgp'] * converted_currencies[market_hash['quote_asset']]
+              market_hash['converted'] = market_hash['price'] * converted_currencies[market_hash['quote_asset']]
             end
           end
           # alias
@@ -144,7 +144,7 @@ module Loaders
           end
           # filter out already calculated
           unless market_hash['converted'].present?
-            market_hash['converted'] = market_hash['avgp'] * converted_currencies[market_hash['quote_asset']]
+            market_hash['converted'] = market_hash['price'] * converted_currencies[market_hash['quote_asset']]
           end
 
           market_hash['final_symbol'] = market_hash['og_symbol']
@@ -154,7 +154,7 @@ module Loaders
           # calculated already? - do nothing
           # else need to calculate
           unless market_hash['converted'].present?
-            market_hash['converted'] = market_hash['avgp'] * converted_currencies[market_hash['quote_asset']]
+            market_hash['converted'] = market_hash['price'] * converted_currencies[market_hash['quote_asset']]
           end
         end
       end
@@ -201,8 +201,8 @@ module Loaders
           market_hashes.sort! {|mh_0, mh_1| mh_0['converted'] <=> mh_1['converted'] }
           total_volume = 0
           total_price_volume = market_hashes.inject(0) do |sum, market_hash|
-            total_volume += market_hash['mbv']
-            sum + market_hash['converted'] * market_hash['mbv']
+            total_volume += market_hash['base_volume']
+            sum + market_hash['converted'] * market_hash['base_volume']
           end
           total_price_volume / total_volume
         else
@@ -222,16 +222,16 @@ module Loaders
           market_hash['og_symbol'] = market_hash['symbol']
           market_hash['og_base_asset'] = market_hash['base_asset']
           market_hash['og_quote_asset'] = market_hash['quote_asset']
-          market_hash['og_price'] = market_hash['avgp']
-          market_hash['og_mbv'] = market_hash['mbv']
-          market_hash['og_mqv'] = market_hash['mqv']
+          market_hash['og_price'] = market_hash['price']
+          market_hash['og_base_volume'] = market_hash['base_volume']
+          market_hash['og_quote_volume'] = market_hash['quote_volume']
         end
 
         # parallel assignment swap trick
         market_hash['base_asset'], market_hash['quote_asset'] = market_hash['quote_asset'], market_hash['base_asset']
-        market_hash['mbv'], market_hash['mqv'] = market_hash['mqv'], market_hash['mbv']
+        market_hash['base_volume'], market_hash['quote_volume'] = market_hash['quote_volume'], market_hash['base_volume']
 
-        market_hash['avgp'] = (1.0 / market_hash['avgp'].to_f)
+        market_hash['price'] = (1.0 / market_hash['price'].to_f)
         market_hash['symbol'] = "#{market_hash['base_asset']}/#{market_hash['quote_asset']}"
       end
 
@@ -239,10 +239,10 @@ module Loaders
         if ALIASES.keys.include?(market_hash['base_asset']) || ALIASES.keys.include?(market_hash['quote_asset'])
           market_hash['og_base_asset'] = market_hash['base_asset']
           market_hash['og_quote_asset'] = market_hash['quote_asset']
-          market_hash['og_price'] = market_hash['avgp']
+          market_hash['og_price'] = market_hash['price']
           market_hash['og_symbol'] = market_hash['symbol']
-          market_hash['og_mbv'] = market_hash['mbv']
-          market_hash['og_mqv'] = market_hash['mqv']
+          market_hash['og_base_volume'] = market_hash['base_volume']
+          market_hash['og_quote_volume'] = market_hash['quote_volume']
 
           if ALIASES.keys.include?(market_hash['base_asset']) && ALIASES.keys.include?(market_hash['quote_asset'])
             market_hash['base_asset'] = ALIASES[market_hash['base_asset']]

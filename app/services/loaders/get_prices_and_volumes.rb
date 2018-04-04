@@ -90,7 +90,7 @@ module Loaders
             #{
               exchanges.map do |exchange|
                 "
-                  SELECT '#{exchange}' as exchange, p.symbol, tp.base_asset, tp.quote_asset, #{timestamp} as times, avg(p.price) as avgp
+                  SELECT '#{exchange}' as exchange, p.symbol, tp.base_asset, tp.quote_asset, #{timestamp} as times, avg(p.price) as price
                   FROM public.#{exchange}_prices p
                   JOIN public.trading_pairs tp
                   ON p.symbol = tp.symbol
@@ -188,7 +188,7 @@ module Loaders
             #{
               exchanges.map do |exchange|
                 "
-                  SELECT '#{exchange}' as exchange, v.symbol, tp.base_asset, tp.quote_asset, #{timestamp} as times, max(v.base_volume) as mbv, max(v.quote_volume) as mqv
+                  SELECT '#{exchange}' as exchange, v.symbol, tp.base_asset, tp.quote_asset, #{timestamp} as times, max(v.base_volume) as base_volume, max(v.quote_volume) as quote_volume
                   FROM public.#{exchange}_volumes v
                   JOIN public.trading_pairs tp
                   ON v.symbol = tp.symbol
