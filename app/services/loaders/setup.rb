@@ -19,9 +19,10 @@ module Loaders
           fiats = fiat_currencies[beginning_of_day(timestamp)]
           bases = sort_by_volume(base_currencies - fiats.keys - ['USD'])
 
+          markets = combine_prices_volumes(prices_volumes[0][timestamp], prices_volumes[1][timestamp])
+
           puts ::Loaders::VolumeWeightedAverage.perform(
-            prices_volumes[0][timestamp],
-            prices_volumes[1][timestamp],
+            markets,
             fiats,
             bases
           ).to_json
@@ -31,6 +32,29 @@ module Loaders
       end
 
       private
+
+      def combine_prices_volumes(prices, volumes) # arr of hashes, arr of hashes
+        if prices.size != volumes.size
+          raise ::Exceptions::BaseError, "price and volume asset mismatch - size check: prices #{prices.size}, volumes: #{volumes.size}"
+        end
+
+        volume_map = {}
+        volumes.each do |volume_hash|
+          volume_map["#{volume_hash['exchange']}-#{volume_hash['symbol']}"] = {
+            'mbv' => volume_hash['mbv'],
+            'mqv' => volume_hash['mqv']
+          }
+        end
+
+        prices.map do |price_hash|
+          volume_attrs = volume_map["#{price_hash['exchange']}-#{price_hash['symbol']}"]
+          if volume_attrs.present?
+            price_hash.merge(volume_attrs)
+          else
+            raise ::Exceptions::BaseError, "price and volume asset mismatch - volume asset missing: #{price_hash.to_json}"
+          end
+        end
+      end
 
       def sort_by_volume(currencies, cbv = CURRENCIES_BY_VOLUME) # array of strings
         currencies.sort_by {|curr| cbv.index(curr) || ::Float::INFINITY}

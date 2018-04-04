@@ -5,7 +5,7 @@ module Loaders
 
     class << self
 
-      def perform(prices, volumes, fiats, bases) # arr of hashes, arr of hashes, hash, arr
+      def perform(markets, fiats, bases) # arr of hashes, hash, arr
         #
       end
 
