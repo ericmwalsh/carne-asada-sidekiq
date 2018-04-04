@@ -19,10 +19,10 @@ module Loaders
           fiats = fiat_currencies[beginning_of_day(timestamp)]
           bases = sort_by_volume(base_currencies - fiats.keys - ['USD'])
 
-          markets = combine_prices_volumes(prices_volumes[0][timestamp], prices_volumes[1][timestamp])
+          pvs = combine_prices_volumes(prices_volumes[0][timestamp], prices_volumes[1][timestamp])
 
           puts ::Loaders::VolumeWeightedAverage.perform(
-            markets,
+            pvs,
             fiats,
             bases
           ).to_json
